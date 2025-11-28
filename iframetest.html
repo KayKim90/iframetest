@@ -2,11 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>GivingData – Interaction Panel (Test)</title>
+<title>SmartSimple – Interaction (Test)</title>
 <style>
-    * {
-        box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
     body {
         font-family: "Segoe UI", Arial, sans-serif;
         margin: 0;
@@ -16,6 +14,7 @@
         font-size: 13px;
     }
 
+    /* Header */
     .header {
         display: flex;
         align-items: center;
@@ -31,7 +30,7 @@
         justify-content: center;
         font-size: 13px;
         font-weight: 600;
-        color: #0b62a4;
+        color: #3c8f4a;
         margin-right: 8px;
     }
     .header-title {
@@ -42,8 +41,10 @@
     .subtext {
         margin-bottom: 12px;
         color: #666;
+        line-height: 1.4;
     }
 
+    /* Field Labels / Values */
     .field-label {
         font-size: 11px;
         text-transform: uppercase;
@@ -52,31 +53,24 @@
         margin-bottom: 2px;
         letter-spacing: 0.03em;
     }
-
     .field-value {
         font-size: 13px;
         margin-bottom: 4px;
         color: #222;
     }
-
     .field-value-muted {
         font-size: 12px;
         color: #666;
         margin-bottom: 4px;
     }
 
-    .section-divider {
-        margin-top: 8px;
-        margin-bottom: 4px;
-    }
-
-    /* Organization boxed area (주황색 테두리) */
+    /* Organization green box */
     .org-box-wrapper {
         margin-top: 4px;
         margin-bottom: 4px;
     }
     .org-box {
-        border: 2px solid #f79a3c;
+        border: 2px solid #3c8f4a;
         border-radius: 4px;
         padding: 6px 8px;
     }
@@ -88,85 +82,70 @@
         font-size: 13px;
     }
 
-    select.request-select {
-        width: 100%;
-        padding: 6px 8px;
-        font-size: 13px;
-        border-radius: 2px;
-        border: 1px solid #ccc;
-        background: #fff;
-    }
-
-    /* Notes area + 툴바 (간단하게 모양만) */
-    .notes-toolbar {
-        display: flex;
-        align-items: center;
-        border: 1px solid #d0d0d0;
-        border-bottom: none;
-        border-radius: 2px 2px 0 0;
-        background: #f9f9f9;
-        padding: 2px 4px;
-        gap: 2px;
-    }
-    .toolbar-button {
-        border: none;
-        background: transparent;
-        padding: 2px 4px;
-        font-size: 12px;
-        cursor: pointer;
-        color: #555;
-    }
-    .toolbar-separator {
-        width: 1px;
-        height: 16px;
-        background: #ddd;
-        margin: 0 3px;
-    }
-    .notes-area {
-        border: 1px solid #d0d0d0;
-        border-radius: 0 0 2px 2px;
-    }
+    /* Notes Area */
     .notes-area textarea {
         width: 100%;
         height: 120px;
-        border: none;
+        border-radius: 3px;
+        border: 1px solid #d0d0d0;
         outline: none;
         resize: vertical;
         padding: 6px 8px;
         font-size: 13px;
         font-family: "Segoe UI", Arial, sans-serif;
+        margin-top: 4px;
+    }
+
+    /* Bottom Button */
+    .footer-actions {
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .primary-btn {
+        padding: 7px 16px;
+        font-size: 13px;
+        border-radius: 3px;
+        border: none;
+        background-color: #3c8f4a;
+        color: #fff;
+        cursor: pointer;
+    }
+    .primary-btn:hover {
+        background-color: #2f6f3a;
     }
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <div class="header">
     <div class="logo-circle">SS</div>
-    <div class="header-title">Test</div>
+    <div class="header-title">SmartSimple</div>
 </div>
 
 <div class="subtext" id="introText">
-    Create a new Interaction record for GivingData from this email.
+    Create a new Interaction record for SmartSimple from this email.
 </div>
 
+<!-- Interaction Title -->
 <div class="field-label">Interaction Title</div>
 <div class="field-value" id="interactionTitle">Loading subject…</div>
 
+<!-- Messages -->
 <div class="field-label">Messages</div>
 <div class="field-value" id="messageCount">1 Message</div>
 
+<!-- Contacts -->
 <div class="field-label">Contacts</div>
 <div class="field-value" id="contactName">Loading contact…</div>
 <div class="field-value-muted" id="contactEmail"></div>
 
-<div class="field-label">Staff</div>
-<div class="field-value" id="staffName">Grant Manager</div>
-
+<!-- Organization -->
 <div class="field-label">Organization</div>
 <div class="org-box-wrapper">
     <div class="org-box">
         <select id="organizationSelect">
-            <!-- 정적 데이터 3개 -->
             <option value="grantseeking-org">Grantseeking Organization</option>
             <option value="new-hope-foundation">New Hope Foundation</option>
             <option value="community-support">Community Support Alliance</option>
@@ -174,93 +153,52 @@
     </div>
 </div>
 
-<div class="field-label">Request</div>
-<select class="request-select" id="requestSelect">
-    <option value="">Select Request</option>
-    <option value="letter-of-inquiry">Letter of Inquiry</option>
-    <option value="full-proposal">Full Proposal</option>
-    <option value="site-visit">Site Visit Follow-up</option>
-</select>
-
+<!-- Notes -->
 <div class="field-label">Interaction Notes</div>
-<div class="notes-toolbar">
-    <button class="toolbar-button"><b>B</b></button>
-    <button class="toolbar-button"><i>I</i></button>
-    <button class="toolbar-button">&#8226; List</button>
-    <button class="toolbar-button">&#35; List</button>
-    <div class="toolbar-separator"></div>
-    <button class="toolbar-button">“Quote”</button>
-    <div class="toolbar-separator"></div>
-    <button class="toolbar-button">⟲</button>
-    <button class="toolbar-button">⟳</button>
-</div>
 <div class="notes-area">
     <textarea id="notesTextarea" placeholder="Enter notes…"></textarea>
 </div>
 
-<!-- Office.js (Outlook 에서만 의미 있음) -->
+<!-- Bottom button -->
+<div class="footer-actions">
+    <button class="primary-btn" id="createInteractionBtn">Create Interaction</button>
+</div>
+
+<!-- Office.js -->
 <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+
 <script>
 (function () {
-    // Office.js 없으면(브라우저 단독 테스트) 기본 텍스트만 유지
+    // Outside Outlook fallback
     if (!window.Office) {
-        console.log("Office.js not found – opened outside Outlook. Using fallback values.");
+        console.log("Office.js not found – using fallback values.");
         document.getElementById("interactionTitle").textContent = "Letter of Inquiry (Test)";
         document.getElementById("contactName").textContent = "Sally Grantseeker";
-        document.getElementById("contactEmail").textContent = "stacey.dabaldo@givingdata.com";
-        document.getElementById("notesTextarea").value =
-            "Test mode: Outlook item not available.\nYou can still test layout in the browser.";
+        document.getElementById("contactEmail").textContent = "stacey.dabaldo@SmartSimple.com";
         return;
     }
 
     Office.onReady(function (info) {
-        console.log("Office.onReady:", info);
-
-        if (info.host !== Office.HostType.Outlook) {
-            console.log("Host is not Outlook:", info.host);
-            return;
-        }
+        if (info.host !== Office.HostType.Outlook) return;
 
         var item = Office.context.mailbox.item;
-        console.log("Outlook item:", item);
-
+        console.log("Office.js item = ",item);
         // Subject → Interaction Title
-        var subject = item.subject || "(No subject)";
-        document.getElementById("interactionTitle").textContent = subject;
+        document.getElementById("interactionTitle").textContent =
+            item.subject || "(No subject)";
 
-        // From → Contacts
-        var fromText = "Unknown sender";
-        var emailText = "";
+        // From → Contact
         if (item.from) {
-            fromText = item.from.displayName || item.from.emailAddress || "Unknown sender";
-            emailText = item.from.emailAddress || "";
+            document.getElementById("contactName").textContent =
+                item.from.displayName || item.from.emailAddress;
+            document.getElementById("contactEmail").textContent =
+                item.from.emailAddress || "";
         }
-        document.getElementById("contactName").textContent = fromText;
-        document.getElementById("contactEmail").textContent = emailText;
+    });
 
-        // Messages: 단순히 1 Message 또는 ConversationIndex로 바꿀 수도 있음
-        document.getElementById("messageCount").textContent = "1 Message";
-
-        // Notes 초기값에 기본 정보 넣기 (원하면 제거 가능)
-        var notes = "";
-        notes += "Subject: " + subject + "\n";
-        if (emailText) {
-            notes += "From: " + fromText + " <" + emailText + ">\n";
-        } else {
-            notes += "From: " + fromText + "\n";
-        }
-
-        // To 받는사람들
-        if (item.to && item.to.length > 0) {
-            notes += "To:\n";
-            item.to.forEach(function (rec) {
-                notes += "  - " + (rec.displayName || rec.emailAddress) +
-                         " <" + (rec.emailAddress || "") + ">\n";
-            });
-        }
-
-        notes += "\n--- Interaction Notes ---\n";
-        document.getElementById("notesTextarea").value = notes;
+    // Test click handler
+    document.getElementById("createInteractionBtn").addEventListener("click", function () {
+        alert("Create Interaction clicked (test)");
     });
 })();
 </script>
