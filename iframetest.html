@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<title>SmartSimple – Interaction Panel (Test)</title>
-<style>
-    * { box-sizing: border-box; }
-    body {
+  <head>
+    <meta charset="UTF-8" />
+    <title>SmartSimple – Interaction Panel</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
         font-family: "Segoe UI", Arial, sans-serif;
         margin: 0;
         padding: 16px 18px;
         background: #ffffff;
         color: #222;
         font-size: 13px;
-    }
+      }
 
-    /* Header */
-    .header {
+      .header {
         display: flex;
         align-items: center;
         margin-bottom: 16px;
-    }
-    .logo-circle {
+      }
+
+      .logo-circle {
         width: 28px;
         height: 28px;
         border-radius: 50%;
@@ -32,68 +35,59 @@
         font-weight: 600;
         color: #3c8f4a;
         margin-right: 8px;
-    }
-    .header-title {
+      }
+
+      .header-title {
         font-size: 18px;
         font-weight: 400;
-    }
+      }
 
-    .subtext {
+      .subtext {
         margin-bottom: 12px;
         color: #666;
         line-height: 1.4;
-    }
+      }
 
-    /* Field Labels / Values */
-    .field-label {
+      .field-label {
         font-size: 11px;
         text-transform: uppercase;
         color: #888;
         margin-top: 10px;
         margin-bottom: 2px;
         letter-spacing: 0.03em;
-    }
-    .field-value {
+      }
+
+      .field-value {
         font-size: 13px;
         margin-bottom: 4px;
         color: #222;
-    }
-    .field-value-muted {
+      }
+
+      .field-value-muted {
         font-size: 12px;
         color: #666;
         margin-bottom: 4px;
-    }
+      }
 
-    /* Organization green box */
-    .org-box-wrapper {
-        margin-top: 4px;
-        margin-bottom: 4px;
-    }
-    .org-box {
-        border: 2px solid #3c8f4a;
-        border-radius: 4px;
-        padding: 6px 8px;
-    }
-    .org-box select {
-        width: 100%;
-        border: none;
-        outline: none;
-        background: transparent;
-        font-size: 13px;
-    }
-
-    /* Request dropdown */
-    select.request-select {
+      .org-box select {
         width: 100%;
         padding: 6px 8px;
         font-size: 13px;
         border-radius: 2px;
         border: 1px solid #ccc;
         background: #fff;
-    }
+      }
 
-    /* Notes Area */
-    .notes-area textarea {
+      select {
+        width: 100%;
+        padding: 6px 8px;
+        font-size: 13px;
+        border-radius: 2px;
+        border: 1px solid #ccc;
+        background: #fff;
+      }
+
+      .notes-area textarea {
         width: 100%;
         height: 120px;
         border-radius: 3px;
@@ -104,15 +98,15 @@
         font-size: 13px;
         font-family: "Segoe UI", Arial, sans-serif;
         margin-top: 4px;
-    }
+      }
 
-    /* Bottom Button */
-    .footer-actions {
+      .footer-actions {
         margin-top: 18px;
         display: flex;
         justify-content: flex-end;
-    }
-    .primary-btn {
+      }
+
+      .primary-btn {
         padding: 7px 16px;
         font-size: 13px;
         border-radius: 3px;
@@ -120,234 +114,204 @@
         background-color: #3c8f4a;
         color: #fff;
         cursor: pointer;
-    }
-    .primary-btn:hover {
+      }
+
+      .primary-btn[disabled],
+      .primary-btn:disabled {
+        background-color: #a9a9a9;
+        color: #e0e0e0;
+        cursor: initial;
+      }
+
+      .primary-btn:hover:not([disabled]) {
         background-color: #2f6f3a;
-    }
-</style>
-</head>
-<body>
+      }
 
-<!-- Header -->
-<div class="header">
-    <div class="logo-circle">SS</div>
-    <div class="header-title">SmartSimple</div>
-</div>
-
-<div class="subtext" id="introText">
-    Create a new Interaction record for SmartSimple from this email.
-</div>
-
-<!-- Interaction Title -->
-<div class="field-label">Interaction Title</div>
-<div class="field-value" id="interactionTitle">Loading subject…</div>
-
-<!-- Messages -->
-<div class="field-label">Messages</div>
-<div class="field-value" id="messageCount">1 Message</div>
-
-<!-- Contacts -->
-<div class="field-label">Contacts</div>
-<div class="field-value" id="contactName">Loading contact…</div>
-<div class="field-value-muted" id="contactEmail"></div>
-
-<!-- Organization -->
-<div class="field-label">Organization</div>
-<div class="org-box-wrapper">
-    <div class="org-box">
-        <select id="organizationSelect">
-            <option value="grantseeking-org">Grantseeking Organization</option>
-            <option value="new-hope-foundation">New Hope Foundation</option>
-            <option value="community-support">Community Support Alliance</option>
-        </select>
+      #info {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #c00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="logo-circle">SS</div>
+      <div class="header-title">SmartSimple</div>
     </div>
-</div>
+    <div class="subtext" id="introText"> Create a new Interaction record for SmartSimple from this email. </div>
+    <div id="info" class="field-value-muted"></div>
+    <div id="main">
+      <div class="field-label">Interaction Title</div>
+      <div class="field-value" id="interactionTitle">Loading subject…</div>
+      <div class="field-label">Messages</div>
+      <div class="field-value" id="messageCount">1 Message</div>
+      <div class="field-label">Contacts</div>
+      <div class="field-value" id="contactName">Loading contact…</div>
+      <div class="field-value-muted" id="contactEmail"></div>
+      <div class="field-label">Organization</div>
+      <select class="select" id="organizationSelect"></select>
+      <div class="field-label">Interaction Notes</div>
+      <div class="notes-area">
+        <textarea id="notesTextarea" placeholder="Enter notes…"></textarea>
+      </div>
+    </div>
+    <div class="footer-actions">
+      <button class="primary-btn" id="createInteractionBtn" onclick="onCreateInteractionClick()"> Create Interaction</button>
+    </div>
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script>
+      const url = (() => {
+        try {
+          return new URL(window.location.href);
+        } catch (e) {
+          return null;
+        }
+      })();
+      const apiroot = url ? url.searchParams.get("apiroot") : null;
+      const rootcompanyid = url ? url.searchParams.get("rootcompanyid") : null;
+      let API_URL = null;
+      let outlookItem = null;
 
-<!-- Request -->
-<div class="field-label">Request</div>
-<select class="request-select" id="requestSelect">
-    <option value="">Select Request</option>
-    <option value="letter-of-inquiry">Letter of Inquiry</option>
-    <option value="full-proposal">Full Proposal</option>
-    <option value="site-visit">Site Visit Follow-up</option>
-</select>
-
-<!-- Notes -->
-<div class="field-label">Interaction Notes</div>
-<div class="notes-area">
-    <textarea id="notesTextarea" placeholder="Enter notes…"></textarea>
-</div>
-
-<!-- Bottom button -->
-<div class="footer-actions">
-    <button class="primary-btn" id="createInteractionBtn">Create Interaction</button>
-</div>
-
-<!-- Office.js -->
-<script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-
-<script>
-(function () {
-    const API_URL = "https://example.com/api/outlook/interaction";
-
-    let outlookItem = null; // Office.context.mailbox.item 저장용
-
-    // Outside Outlook fallback
-    if (!window.Office) {
-        console.log("Office.js not found – using fallback values.");
-        document.getElementById("interactionTitle").textContent = "Letter of Inquiry (Test)";
-        document.getElementById("contactName").textContent = "Sally Grantseeker";
-        document.getElementById("contactEmail").textContent = "stacey.dabaldo@SmartSimple.com";
-
-        document.getElementById("createInteractionBtn").addEventListener("click", function () {
-            const payload = {
-                source: "browser-fallback",
-                interactionTitle: document.getElementById("interactionTitle").textContent,
-                organization: document.getElementById("organizationSelect").value,
-                request: document.getElementById("requestSelect").value,
-                notes: document.getElementById("notesTextarea").value
-            };
-            console.log("Payload (fallback, not Outlook):", payload);
-            alert("Test only (no Outlook item). Check console for payload.");
+      function setOrganizationDropdown() {
+        const orglist = [{
+          value: "Grantseeking Organization",
+          id: "1234"
+        }, {
+          value: "New Hope Foundation",
+          id: "1235"
+        }, {
+          value: "Community Support Alliance",
+          id: "1236"
+        }];
+        const orgSelect = document.getElementById("organizationSelect");
+        if (!orgSelect) return;
+        orgSelect.innerHTML = "";
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "";
+        defaultOpt.textContent = "Select Organization";
+        orgSelect.appendChild(defaultOpt);
+        orglist.forEach(org => {
+          const opt = document.createElement("option");
+          opt.value = org.id;
+          opt.textContent = org.value;
+          orgSelect.appendChild(opt);
         });
-        return;
-    }
-
-    Office.onReady(function (info) {
-        if (info.host !== Office.HostType.Outlook) {
+      }
+      window.onload = function() {
+        const infoEl = document.getElementById("info");
+        const maindiv = document.getElementById("main");
+        const buttonEl = document.getElementById("createInteractionBtn");
+        if (apiroot) {
+          const cleanapiroot = apiroot.replace(/\/$/, ""); // remove trailing slash3:19 PM 12/1/2025
+          API_URL = "https://" + cleanapiroot + "/api/outlook/interaction";
+        } else {
+          console.warn("apiroot param is missing.");
+          maindiv.style.display = "none";
+          infoEl.textContent = "API endpoint is not configured. Please contact the admin.";
+          buttonEl.disabled = true;
+        }
+        setOrganizationDropdown();
+        if (!window.Office) {
+          console.log("Office.js not found.");
+          infoEl.textContent = "Please try again, or contact the admin.";
+          maindiv.style.display = "none";
+          buttonEl.disabled = true;
+          return;
+        }
+        Office.onReady(function(info) {
+          if (info.host !== Office.HostType.Outlook) {
             console.log("Host is not Outlook:", info.host);
+            const infoEl = document.getElementById("info");
+            if (infoEl) infoEl.textContent = "Please try again, or contact the admin.";
             return;
-        }
-
-        outlookItem = Office.context.mailbox.item;
-
-        // Subject → Interaction Title
-        document.getElementById("interactionTitle").textContent =
-            outlookItem.subject || "(No subject)";
-
-        // From → Contact
-        if (outlookItem.from) {
-            document.getElementById("contactName").textContent =
-                outlookItem.from.displayName || outlookItem.from.emailAddress || "Unknown sender";
-            document.getElementById("contactEmail").textContent =
-                outlookItem.from.emailAddress || "";
-        }
-
-        document.getElementById("messageCount").textContent = "1 Message";
-
-        document.getElementById("createInteractionBtn").addEventListener("click", onCreateInteractionClick);
-    });
-
-    function onCreateInteractionClick() {
-       const url = new URL(window.location.href);
-       const apiroot = url.searchParams.get("apiroot");
-       const rootcompanyid = url.searchParams.get("rootcompanyid");
-
-       console.log("url=", apiroot, rootcompanyid);
-       
-        if (!outlookItem) {
-            console.warn("Outlook item not ready yet.");
-            alert("Outlook item not ready yet.");
-            return;
-        }
-
-        outlookItem.body.getAsync("text", function (result) {
-            if (result.status !== Office.AsyncResultStatus.Succeeded) {
-                console.error("Failed to get body:", result.error);
-                alert("Failed to read email body.");
-                return;
-            }
-
-            const bodyText = result.value || "";
-
-            // Recipients (To)
-            const toRecipients = (outlookItem.to || []).map(function (rec) {
-                return {
-                    displayName: rec.displayName,
-                    emailAddress: rec.emailAddress
-                };
-            });
-
-            // CC 
-            const ccRecipients = (outlookItem.cc || []).map(function (rec) {
-                return {
-                    displayName: rec.displayName,
-                    emailAddress: rec.emailAddress
-                };
-            });
-
-            // Attachments
-            const attachments = (outlookItem.attachments || []).map(function (att) {
-                return {
-                    id: att.id,
-                    name: att.name,
-                    contentType: att.contentType,
-                    size: att.size,
-                    isInline: att.isInline
-                };
-            });
-
-            // UI values
-            const organization = document.getElementById("organizationSelect").value;
-            const request = document.getElementById("requestSelect").value;
-            const notes = document.getElementById("notesTextarea").value;
-            const interactionTitle = document.getElementById("interactionTitle").textContent;
-
-            // Metadata + basic info
-            const payload = {
-                interactionTitle: interactionTitle,
-                organization: organization,
-                request: request,
-                notes: notes,
-
-                // Outlook basic info
-                subject: outlookItem.subject,
-                body: bodyText,
-                from: outlookItem.from ? {
-                    displayName: outlookItem.from.displayName,
-                    emailAddress: outlookItem.from.emailAddress
-                } : null,
-                toRecipients: toRecipients,
-                ccRecipients: ccRecipients,
-
-                dateTimeCreated: outlookItem.dateTimeCreated || null,
-                dateTimeReceived: outlookItem.dateTimeReceived || null,
-
-                // Metadata
-                itemId: outlookItem.itemId || null,
-                conversationId: outlookItem.conversationId || null,
-                internetMessageId: outlookItem.internetMessageId || null,
-
-                // Attachments (metadata only)
-                attachments: attachments
-            };
-
-            console.log("Payload to send to API:", payload);
-
-            // api call 
-/*
-            fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(function (res) {
-                console.log("API response status:", res.status);
-                alert("Interaction payload sent to API (mock). Check console for details.");
-            })
-            .catch(function (err) {
-                console.error("API call failed:", err);
-                alert("Failed to send interaction to API. See console for details.");
-            });
-*/
+          }
+          outlookItem = Office.context.mailbox.item;
+          document.getElementById("interactionTitle").textContent = outlookItem.subject || "(No subject)";
+          if (outlookItem.from) {
+            document.getElementById("contactName").textContent = outlookItem.from.displayName || outlookItem.from.emailAddress || "Unknown sender";
+            document.getElementById("contactEmail").textContent = outlookItem.from.emailAddress || "";
+          }
+          document.getElementById("messageCount").textContent = "1 Message";
         });
-    }
-})();
-</script>
+      };
 
-</body>
+      function onCreateInteractionClick() {
+        if (!outlookItem) {
+          console.warn("Outlook item not ready yet.");
+          alert("Outlook item not ready yet.");
+          return;
+        }
+        outlookItem.body.getAsync("text", function(result) {
+          if (result.status !== Office.AsyncResultStatus.Succeeded) {
+            console.error("Failed to get body:", result.error);
+            alert("Failed to read email body.");
+            return;
+          }
+          const bodyText = result.value || "";
+          const toRecipients = (outlookItem.to || []).map(function(rec) {
+            return {
+              displayName: rec.displayName,
+              emailAddress: rec.emailAddress
+            };
+          });
+          const ccRecipients = (outlookItem.cc || []).map(function(rec) {
+            return {
+              displayName: rec.displayName,
+              emailAddress: rec.emailAddress
+            };
+          });
+          const attachments = (outlookItem.attachments || []).map(function(att) {
+            return {
+              id: att.id,
+              name: att.name,
+              contentType: att.contentType,
+              size: att.size,
+              isInline: att.isInline
+            };
+          });
+          const organization = document.getElementById("organizationSelect").value;
+          const notes = document.getElementById("notesTextarea").value;
+          const interactionTitle = document.getElementById("interactionTitle").textContent;
+          const payload = {
+            interactionTitle: interactionTitle,
+            organization: organization,
+            notes: notes,
+            subject: outlookItem.subject,
+            body: bodyText,
+            from: outlookItem.from ? {
+              displayName: outlookItem.from.displayName,
+              emailAddress: outlookItem.from.emailAddress
+            } : null,
+            toRecipients: toRecipients,
+            ccRecipients: ccRecipients,
+            dateTimeCreated: outlookItem.dateTimeCreated || null,
+            dateTimeReceived: outlookItem.dateTimeReceived || null,
+            itemId: outlookItem.itemId || null,
+            conversationId: outlookItem.conversationId || null,
+            internetMessageId: outlookItem.internetMessageId || null,
+            attachments: attachments
+          };
+          console.log("Payload to send to API:", payload);
+          /*
+                  fetch(API_URL, {
+                      method: "POST",
+                      headers: {
+                          "Content-Type": "application/json"
+                      },
+                      body: JSON.stringify(payload)
+                  })
+                  .then(function (res) {
+                      console.log("API response status:", res.status);
+                      alert("Interaction payload sent to API (mock). Check console for details.");
+                  })
+                  .catch(function (err) {
+                      console.error("API call failed:", err);
+                      alert("Failed to send interaction to API. See console for details.");
+                  });
+          */
+        });
+      }
+    </script>
+  </body>
 </html>
-
-
