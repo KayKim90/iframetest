@@ -239,6 +239,12 @@
     });
 
     function onCreateInteractionClick() {
+       const url = new URL(window.location.href);
+       const apiroot = url.searchParams.get("apiroot");
+       const rootcompanyid = url.searchParams.get("rootcompanyid");
+
+       console.log("url=", apiroot, rootcompanyid);
+       
         if (!outlookItem) {
             console.warn("Outlook item not ready yet.");
             alert("Outlook item not ready yet.");
@@ -343,4 +349,5 @@
 
 </body>
 </html>
+
 
